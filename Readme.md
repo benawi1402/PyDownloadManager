@@ -79,7 +79,7 @@
 
 
 ## Disclaimer
-Hi, my name is Frederik and I am currently in the final stretch of my computer science studying program in Germany.
+Hi, my name is Frederik, and I am currently in the final stretch of my computer science studying program in Germany.
 My programming experience stretches over multiple languages, but most projects have been created in Java. 
 This project is one of my first 'bigger' endeavours into python and as such will have parts that are not very python-ic.
 
