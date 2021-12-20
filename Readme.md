@@ -56,10 +56,10 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
+        <a href="#disclaimer">Disclaimer</a>
+    </li>
+    <li>
+      <a href="#planned-features">Planned Features</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -89,7 +89,17 @@ If you are reading through this code and have suggestions, be it about my code s
 You are also welcome to create a fork and suggest a solution via pull request, although it might be necessary to give further explanation/links why your solution might be better.
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Planned Features
+The PyDownloadManager aims to be a simple download manager with basic capabilities for configuration/usage.
+
+Since the software is not yet usable, here is a list of features that are planned for implementation:
+
+- simple extendable command interface to interact with downloader
+- global configuration for speed limit, download folder etc., as well as download specific configurations
+- a detachable download process in background that can be watched if necessary
+- downloads should be configurable in runtime (e.g. if you want to update your speed limit)
+- parallel downloads up to a configurable maximum amount
+- download queue
 
 # This is still WIP
 
@@ -98,15 +108,6 @@ You are also welcome to create a fork and suggest a solution via pull request, a
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `benawi1402`, `PyDownloadManager`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
-
-* Python
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
