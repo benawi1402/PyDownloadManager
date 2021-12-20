@@ -78,6 +78,15 @@
 </details>
 
 
+## Disclaimer
+Hi, my name is Frederik and I am currently in the final stretch of my computer science studying program in Germany.
+My programming experience stretches over multiple languages, but most projects have been created in Java. 
+This project is one of my first 'bigger' endeavours into python and as such will have parts that are not very python-ic.
+
+The main reason for creating this is to create a tool that I need myself, but also to learn more about development in python.
+If you are reading through this code and have suggestions, be it about my code style or a better solution for problems, feel free to create an issue with the "programming advice" label.
+
+You are also welcome to create a fork and suggest a solution via pull request, although it might be necessary to give further explanation/links why your solution might be better.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
