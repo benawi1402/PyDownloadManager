@@ -10,7 +10,6 @@ class InteractionManager:
         parser = argparse.ArgumentParser(description='PyDownloadManager, created by Frederik Maassen. Simple and clean python download manager that lives in your console/terminal/bash.')
         str_commands = []
         command_dict = self.command_repo.find_commands()
-        print(command_dict)
         for key in command_dict:
             str_commands.append(key)
         parser.add_argument('command', choices=str_commands, help='Calls one of the defined commands')
