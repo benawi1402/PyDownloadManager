@@ -1,13 +1,12 @@
 from interaction.command.Command import Command
 
 
-class WatchCommand(Command):
+class QueueCommand(Command):
     def get_command(self):
-        return "watch"
+        return "queue"
 
     def get_args(self):
         return []
 
     def execute(self):
-        print("Watch executed")
         pass

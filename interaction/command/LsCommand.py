@@ -2,9 +2,6 @@ from interaction.command.Command import Command
 
 
 class LsCommand(Command):
-    def listen(self, commands):
-        pass
-
     def get_command(self):
         return "ls"
 
