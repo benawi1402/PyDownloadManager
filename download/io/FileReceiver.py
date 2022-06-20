@@ -8,16 +8,18 @@ class FileReceiver:
     min_chunk_size = 1024
     max_chunk_size = 102400
 
-    def __init__(self, url, file_path, speed_limit, memory_limit):
+    default_memory_limit_per_download = 50
+
+    def __init__(self, download_info):
         """
         speed limit is given in Kb/1s
 
         TODO: parameter assertion
         """
-        self.url = url
-        self.speed_limit = speed_limit
-        self.memory_limit = memory_limit
-        self.file_path = file_path
+        self.url = download_info.url
+        self.speed_limit = download_info.limit
+        self.memory_limit = self.default_memory_limit_per_download
+        self.file_path = download_info.file_path
 
     async def receive(self):
         """
@@ -40,3 +42,6 @@ class FileReceiver:
     def calculate_chunk_size(self):
         chunk_size = self.speed_limit / 2
         return min(max(self.min_chunk_size, chunk_size), self.max_chunk_size)
+
+    def run(self):
+        asyncio.run(self.receive())
