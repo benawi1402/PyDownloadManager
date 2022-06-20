@@ -1,6 +1,6 @@
-from config.YAMLConfigSource import YAMLConfigSource
-from config.PickleConfigSource import PickleConfigSource
-from config.Config import Config
+from YAMLConfigSource import YAMLConfigSource
+from PickleConfigSource import PickleConfigSource
+from Config import Config
 from pydantic import ValidationError, validate_model
 
 

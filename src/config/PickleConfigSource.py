@@ -1,4 +1,4 @@
-import ConfigSource, Config
+import ConfigSource
 from os.path import exists
 import pickle
 

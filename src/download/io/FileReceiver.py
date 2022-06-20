@@ -3,7 +3,7 @@ import asyncio
 import requests
 import time
 
-from download.io.algorithm.TokenBucket import TokenBucket
+from algorithm.TokenBucket import TokenBucket
 
 
 class FileReceiver:

@@ -1,4 +1,4 @@
-from interaction.command.Command import Command
+from .Command import Command
 
 
 class WatchCommand(Command):

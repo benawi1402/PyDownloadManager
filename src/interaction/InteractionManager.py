@@ -1,5 +1,4 @@
 from interaction.CommandRepository import CommandRepository
-from interaction.command.Command import Command
 import argparse
 
 
