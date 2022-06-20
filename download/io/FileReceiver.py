@@ -1,7 +1,9 @@
-import requests, time
 import asyncio
+
+import requests
+import time
+
 from download.io.algorithm.TokenBucket import TokenBucket
-import logging
 
 
 class FileReceiver:
@@ -33,7 +35,7 @@ class FileReceiver:
         chunk_size = self.calculate_chunk_size()
         file = open(self.file_path, "wb")
         for data in req.iter_content(chunk_size=chunk_size):
-            while not bucket.consume(chunk_size/1000):
+            while not bucket.consume(chunk_size / 1000):
                 time.sleep(0.01)
             file.write(data)
 
