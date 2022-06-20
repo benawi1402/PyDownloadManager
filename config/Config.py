@@ -3,6 +3,7 @@ from helpers import is_path_exists_or_creatable
 
 
 class Config(BaseModel):
+    changed=False
     default_memory_limit_per_download: int = 50
     logging_path: str = "./py_download_manager.log"
     default_speed_limit_per_download: int = 1000
@@ -31,3 +32,7 @@ class Config(BaseModel):
         if v < 1:
             raise ValueError('Supplied default_download_concurrent_limit needs to be positive')
         return v
+
+    def __setattr__(self, key, value):
+        self.changed = True
+        super().__setattr__(key, value)

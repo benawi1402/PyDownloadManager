@@ -8,11 +8,13 @@ class PickleConfigSource(ConfigSource):
 
     def __init__(self):
         super().__init__()
+        self.config = super().config
 
-    def initialize_source(self):
-        if exists(self.pickle_file):
-            self.config = pickle.load(open(self.pickle_file, 'rb'))
-        else:
-            pickle.dump(self.config, open(self.pickle_file, 'rb'))
+    def save(self):
+        return pickle.dump(self.config, open(self.pickle_file, 'rb'))
 
+    def load(self):
+        return pickle.load(open(self.pickle_file, 'rb'))
 
+    def exists(self):
+        return exists(self.pickle_file)

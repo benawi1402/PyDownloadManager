@@ -1,45 +1,67 @@
-from YAMLConfigSource import YAMLConfigSource
-from PickleConfigSource import PickleConfigSource
-from Config import Config
-
-config_object = None
-default_config = Config()
-source_objects = []
-
-sources = {
-    'pickle': PickleConfigSource(),
-    'yaml': YAMLConfigSource(),
-}
+from config.YAMLConfigSource import YAMLConfigSource
+from config.PickleConfigSource import PickleConfigSource
+from config.Config import Config
+from pydantic import ValidationError, validate_model
 
 
-def init_sources():
-    global source_objects
-    global sources
-    for name, source in sources.items():
-        source.initialize_source()
-        source_objects.append(source.supply_config())
+class ConfigManager:
+    config_object = None
+    default_config = Config()
+    source_objects = []
+    instance = None
 
+    sources = {
+        'pickle': PickleConfigSource(),
+        'yaml': YAMLConfigSource(),
+    }
 
-def get_config():
-    global config_object
-    global source_objects
-    if config_object is None:
+    live_sources = ['pickle']
+
+    def __init__(self):
+        self.refresh_sources()
+        self.refresh_config()
+
+    def __new__(cls):
+        if cls.instance is not None:
+            return cls.instance
+        else:
+            inst = cls.instance = super(ConfigManager, cls).__new__()
+            return inst
+
+    def refresh_sources(self):
+        self.source_objects = []
+        for name, source in self.sources.items():
+            source.refresh()
+            self.source_objects.append(source.supply_config())
+
+    def refresh_config(self):
         config_value_lock = []
         new_config = Config()
-        for source_config in source_objects:
+        for source_config in self.source_objects:
             for attr, value in source_config.__dict__.items():
-                if value is not get_default_value(attr) and attr not in config_value_lock:
-                    setattr(new_config, attr, value)
-                    config_value_lock.append(attr)
+                if value is not self.get_default_value(attr) and attr not in config_value_lock:
+                    try:
+                        setattr(new_config, attr, value)
+                        config_value_lock.append(attr)
+                    except ValidationError as e:
+                        print(e.json)
 
-        config_object = new_config
+        self.config_object = new_config
 
-    return config_object
+    def get_default_value(self, attr):
+        return getattr(self.default_config, attr)
 
+    def get_config(self, force_reload=False):
+        if self.config_object.changed or force_reload:
+            self.refresh_config()
+        return self.config_object
 
-def get_default_value(attr):
-    global default_config
-    return getattr(default_config, attr)
-
-
-init_sources()
+    def persist(self):
+        # re-validate just in case
+        *_, validation_error = validate_model(self.config_object.__class__, self.config_object.__dict__)
+        if validation_error:
+            print('Config is invalid, not persisting')
+            return
+        for source in self.live_sources:
+            self.sources[source].update()
+            self.sources[source].save()

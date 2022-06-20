@@ -8,6 +8,23 @@ class ConfigSource(ABC):
     def supply_config(self):
         return self.config
 
+    def refresh(self):
+        if self.exists():
+            self.config = self.load()
+        else:
+            self.save()
+
+    def update(self, config: Config):
+        self.config = config
+
     @abstractmethod
-    def initialize_source(self):
+    def save(self):
+        pass
+
+    @abstractmethod
+    def load(self):
+        pass
+
+    @abstractmethod
+    def exists(self):
         pass

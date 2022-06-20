@@ -1,15 +1,16 @@
 import ConfigSource
-from os.path import exists
 import yaml
+
 
 class YAMLConfigSource(ConfigSource):
     yaml_file = 'config.yaml'
 
     def __init__(self):
         super().__init__()
+        self.config = super().config
 
-    def initialize_source(self):
-        if exists(self.yaml_file):
-            self.config = yaml.load(open(self.yaml_file, 'rb'), Loader=yaml.Loader)
-        else:
-            yaml.dump(self.config, open(self.yaml_file, 'rb'))
+    def save(self):
+        yaml.dump(self.config, open(self.yaml_file, 'rb'))
+
+    def load(self):
+        self.config = yaml.load(open(self.yaml_file, 'rb'), Loader=yaml.Loader)
