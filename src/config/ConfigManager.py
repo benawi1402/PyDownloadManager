@@ -1,6 +1,6 @@
-from YAMLConfigSource import YAMLConfigSource
-from PickleConfigSource import PickleConfigSource
-from Config import Config
+from .YAMLConfigSource import YAMLConfigSource
+from .PickleConfigSource import PickleConfigSource
+from .Config import Config
 from pydantic import ValidationError, validate_model
 
 
@@ -25,7 +25,7 @@ class ConfigManager:
         if cls.instance is not None:
             return cls.instance
         else:
-            inst = cls.instance = super(ConfigManager, cls).__new__()
+            inst = cls.instance = super(ConfigManager, cls).__new__(cls)
             return inst
 
     def refresh_sources(self):

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Config import Config
+from .Config import Config
 
 
 class ConfigSource(ABC):
