@@ -1,14 +1,16 @@
-import unittest
-from config.Config import Config
 import os
 from os.path import exists
-import yaml
 
+import yaml
+from pyfakefs.fake_filesystem_unittest import TestCase
+
+from config.Config import Config
 from config.YAMLConfigSource import YAMLConfigSource
 
 
-class TestPickleConfigSource(unittest.TestCase):
+class TestPickleConfigSource(TestCase):
     def setUp(self):
+        self.setUpPyfakefs()
         yaml_config_source = YAMLConfigSource()
         if exists(yaml_config_source.yaml_file_path):
             os.remove(yaml_config_source.yaml_file_path)
@@ -32,3 +34,9 @@ class TestPickleConfigSource(unittest.TestCase):
         loaded_config = yaml_config_source.load()
         self.assertIsInstance(loaded_config, Config)
         self.assertEqual(config, loaded_config)
+
+    def test_exists(self):
+        yaml_config_source = YAMLConfigSource()
+        yaml_config_source.save()
+
+        self.assertTrue(yaml_config_source.exists())

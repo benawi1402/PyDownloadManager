@@ -1,6 +1,6 @@
 import validators
 
-from exception.DownloadURLException import DownloadURLException
+from exception.DownloadURLError import DownloadURLException
 
 
 class DownloadInfo:

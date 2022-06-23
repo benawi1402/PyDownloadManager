@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from .Config import Config
 
 
@@ -22,7 +23,7 @@ class ConfigSource(ABC):
         pass
 
     @abstractmethod
-    def load(self):
+    def load(self, reload=False):
         pass
 
     @abstractmethod

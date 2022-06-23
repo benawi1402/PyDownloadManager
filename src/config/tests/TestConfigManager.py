@@ -1,4 +1,4 @@
-import unittest
+from pyfakefs.fake_filesystem_unittest import TestCase
 
 from config.Config import Config
 from config.ConfigManager import ConfigManager
@@ -6,7 +6,10 @@ from config.PickleConfigSource import PickleConfigSource
 from config.YAMLConfigSource import YAMLConfigSource
 
 
-class TestConfigManager(unittest.TestCase):
+class TestConfigManager(TestCase):
+    def setUp(self):
+        self.setUpPyfakefs()
+
     def test_get_default_value(self):
         config_manager = ConfigManager()
         default_config = Config()

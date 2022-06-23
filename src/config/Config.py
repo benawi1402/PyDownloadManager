@@ -1,9 +1,10 @@
 from pydantic import BaseModel, validator
+
 from helpers import is_path_exists_or_creatable
 
 
 class Config(BaseModel):
-    changed=False
+    changed = False
     default_memory_limit_per_download: int = 50
     logging_path: str = "./py_download_manager.log"
     default_speed_limit_per_download: int = 1000
